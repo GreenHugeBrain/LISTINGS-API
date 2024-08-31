@@ -20,7 +20,7 @@ def get_listings():
     if response.status_code == 200:
         return jsonify(response.json())
     else:
-        return jsonify({'error': 'Failed to fetch listings', 'details': response.text}), response.status_code
+        return jsonify({'error': 'Failed to fetch listings', 'details': response.json()}), response.status_code
 
 if __name__ == '__main__':
     app.run()
