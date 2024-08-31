@@ -1,25 +1,25 @@
 from flask import Flask, jsonify, request
 import requests
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/api/listings', methods=['GET'])
 def get_listings():
-    api_key = 'NqsXK0DnQA9zGQu90_vXyVDXnyPJq3qB'  # Ensure this environment variable is set
     url = 'https://csfloat.com/api/v1/listings'
     headers = {
-        'Authorization': f'Bearer {api_key}',
+        'Authorization': 'NqsXK0DnQA9zGQu90_vXyVDXnyPJq3qB',
         'Content-Type': 'application/json'
     }
+    cookies = {
+        'session': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGVhbV9pZCI6Ijc2NTYxMTk5MDk1Mzg0NjI2Iiwibm9uY2UiOjAsImltcGVyc29uYXRlZCI6ZmFsc2UsImlzcyI6ImNzdGVjaCIsImV4cCI6MTcyNTU0Nzk0NX0.1SHRlZKbXXtIaHMz7QK8TNpOu2v8kbaFA9o2UvPhDIw'
+    }
     
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, cookies=cookies)
     
     if response.status_code == 200:
         return jsonify(response.json())
     else:
-        return jsonify({'error': 'Failed to fetch listings'}), response.status_code
+        return jsonify({'error': 'Failed to fetch listings', 'details': response.text}), response.status_code
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)  # Ensure Flask is listening on all network interfaces
+    app.run()
