@@ -5,10 +5,10 @@ app = Flask(__name__)
 
 @app.route('/api/listings', methods=['GET'])
 def get_listings():
-    api_key = 'NqsXK0DnQA9zGQu90_vXyVDXnyPJq3qB'
+    api_key = 'NqsXK0DnQA9zGQu90_vXyVDXnyPJq3qB'  # Ensure this environment variable is set
     url = 'https://csfloat.com/api/v1/listings'
     headers = {
-        'Authorization': api_key,
+        'Authorization': f'Bearer {api_key}',
         'Content-Type': 'application/json'
     }
     
@@ -20,4 +20,4 @@ def get_listings():
         return jsonify({'error': 'Failed to fetch listings'}), response.status_code
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=80)  # Ensure Flask is listening on all network interfaces
