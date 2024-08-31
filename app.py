@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
+from flask_cors import Cors
 import requests
 
 app = Flask(__name__)
+Cors(app)
 
 @app.route('/api/listings', methods=['GET'])
 def get_listings():
