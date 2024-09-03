@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/listings', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_listings():
     api_key = 'NqsXK0DnQA9zGQu90_vXyVDXnyPJq3qB'
     all_listings = []
